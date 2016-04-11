@@ -6,20 +6,20 @@
   * Adapted from http://www.w3schools.com/php/func_mail_mail.asp
   */
   
-  $name = $_REQUEST['name'];
-  $first = $_REQUEST['first'];
-  $last = $_REQUEST['last'];
-  $email = $_REQUEST['email'];
-  $website = $_REQUEST['website'];
-  $subject = $_REQUEST['subject'];
-  $message = $_REQUEST['message'];
+  $name = isset($_REQUEST["name"]) && strlen($_REQUEST["name"]) > 1 ? $_REQUEST["name"] : null;
+  $first = isset($_REQUEST["first"]) && strlen($_REQUEST["first"]) > 1 ? $_REQUEST["first"] : null;
+  $last = isset($_REQUEST["last"]) && strlen($_REQUEST["last"]) > 1 ? $_REQUEST["last"] : null;
+  $email = isset($_REQUEST["email"]) && strlen($_REQUEST["email"]) > 1 ? $_REQUEST["email"] : null;
+  $website = isset($_REQUEST["website"]) && strlen($_REQUEST["website"]) > 1 ? $_REQUEST["website"] : null;
+  $subject = isset($_REQUEST["subject"]) && strlen($_REQUEST["subject"]) > 1 ? $_REQUEST["subject"] : null;
+  $message = isset($_REQUEST["message"]) && strlen($_REQUEST["message"]) > 1 ? $_REQUEST["message"] : null;
   $success = true;
   
   if (!$name) {
     if ($first) {
       $name = $first;
       if ($last) {
-        $name += ' '.$last;
+        $name += " $last";
       }
     } else {
       if ($last) {
@@ -29,32 +29,32 @@
   }
   if (!$name) {
     $success = false;
-    echo 'Name does not exist';
+    echo "Name does not exist.\n";
   }
   
   if (!$email) {
     $success = false;
-    echo 'Email does not exist';
+    echo "Email does not exist.\n";
   }
   
   if (!$subject) {
-    $subject = 'Email from '.$name;
+    $subject = "Email from $name";
   }
   
   if ($message) {
-    $content = $name.' sent you a message from '.$email.'.';
+    $content = "$name sent you a message from $email.\n";
     if ($website) {
-      $content += '\n\nWebsite: '.$website;
+      $content += "Website: $website\n";
     }
-    $content += '\n\n'.$message;
+    $content += "$message";
   } else {
     $success = false;
-    echo 'Message does not exist';
+    echo "Message does not exist.\n";
   }
 
   if ($success) { // Send message
     mail($email, $subject, $content);
-    echo 'Yahoo, message sent successfully'.
+    echo "Yahoo, message sent successfully";
   }
    
 ?>
