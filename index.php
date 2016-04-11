@@ -3,7 +3,6 @@
   * Mail Gorilla
   * JamRizzi Technologies (c) 2016
   * GNU Public License Version 3
-  * Adapted from http://www.w3schools.com/php/func_mail_mail.asp
   */
   
   $name = isset($_REQUEST["name"]) && strlen($_REQUEST["name"]) > 1 ? $_REQUEST["name"] : null;
